@@ -24,8 +24,8 @@ const VideoItemCard = props => {
             <BottomLeftCard>
               <VideoTitle>{title}</VideoTitle>
               <BottomViewCard>
-                <p>{name}</p>
-                <p>{viewCount} views</p>
+                <p>{name} *</p>
+                <p>{viewCount} views *</p>
                 <p>{publishedAt}</p>
               </BottomViewCard>
             </BottomLeftCard>

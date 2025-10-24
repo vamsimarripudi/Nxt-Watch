@@ -1,16 +1,20 @@
 import styled from 'styled-components'
 
 export const VideoItemContainer = styled.li`
-  height: 250px;
+  height: auto;
   width: 300px;
+
   border-width: 1px solid black;
   margin: 10px;
   padding: 0px;
   text-decoration: none;
-  background-color: red;
+  background-color: #f4f3f3;
+  @media screen and (max-width: 768px) {
+    margin: 5px;
+  }
 `
 export const VideoImage = styled.img`
-  height: 130px;
+  height: auto;
   width: 100%;
 `
 
@@ -18,6 +22,7 @@ export const BottomCard = styled.div`
   display: flex;
   align-items: center;
   padding: 5px;
+  height: auto;
 `
 
 export const BottomLeftCard = styled.div`

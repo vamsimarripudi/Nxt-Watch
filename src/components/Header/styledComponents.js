@@ -3,8 +3,7 @@ import styled from 'styled-components'
 export const NavBar = styled.nav`
   padding: 10px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+
   background-color: #f1f5f9;
   padding-left: 30px;
   padding-right: 30px;
@@ -25,6 +24,7 @@ export const ProfileImage = styled.img`
 export const LogoutDivContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin: 10px;
 `
 
@@ -36,4 +36,33 @@ export const LogoutButton = styled.button`
   padding-right: 25px;
   font-weight: bold;
   cursor: pointer;
+`
+
+export const LogoutMobileContainer = styled.div`
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f1f5f9;
+
+  height: 70px;
+  width: auto;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`
+
+export const NavBarDesktopVersion = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+export const IconDivContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `

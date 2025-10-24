@@ -3,7 +3,14 @@ import {FaSearch} from 'react-icons/fa'
 import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import VideoItemCard from '../VideoItemCard'
-import {DivContainer, VideosUnOrderList} from './styledComponents'
+import NxtWatchBanner from '../NxtWatchBanner'
+
+import {
+  DivContainer,
+  VideosUnOrderList,
+  SearchInput,
+  SearchInputDiv,
+} from './styledComponents'
 
 const apiStatusConstants = {
   initial: 'INITIAL',
@@ -39,9 +46,9 @@ class HomeVideo extends Component {
     thumbnailUrl: each.thumbnail_url,
   })
 
-  getHomeVideosApi = async () => {
+  getHomeVideosApi = async (searchInput = '') => {
     this.setState({apiStatus: apiStatusConstants.inProgress})
-    const {searchInput} = this.state
+
     const jwtToken = Cookies.get('jwt_token')
 
     const apiUrl = `https://apis.ccbp.in/videos/all?search=${searchInput}`
@@ -70,39 +77,60 @@ class HomeVideo extends Component {
     }
   }
 
+  onSearch = () => {
+    const {searchInput} = this.state
+    this.getHomeVideosApi(searchInput)
+  }
+
+  onKey = e => {
+    if (e.key.toLowerCase() === 'enter') {
+      this.onSearch()
+    }
+  }
+
   renderLoadingView = () => (
-    <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+      }}
+      data-testid="loader"
+    >
+      <Loader type="ThreeDots" color="blue" height="50" width="50" />
     </div>
   )
 
   onRetryButton = () => this.getHomeVideosApi()
 
   renderVideosView = () => {
-    const {videosList, searchInput} = this.state
-    const noVideos = videosList.length !== 0
+    const {videosList} = this.state
+    const hasVideos = videosList.length !== 0
 
     return (
       <div>
-        <input
-          type="search"
-          fixed
-          value={searchInput}
-          onChange={this.onChangeSearchInput}
-        />
-        <FaSearch size="19" />
-        {noVideos ? (
+        {hasVideos ? (
           <VideosUnOrderList>
             {videosList.map(eachItem => (
               <VideoItemCard key={eachItem.id} videoDetails={eachItem} />
             ))}
           </VideosUnOrderList>
         ) : (
-          <div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100vh',
+            }}
+          >
             <img
               src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
               alt="no videos"
-              className=""
+              style={{height: '300px', width: '300px'}}
             />
             <h1>No Search Results Found</h1>
             <p>Try different keywords or remove the search filter.</p>
@@ -144,7 +172,28 @@ class HomeVideo extends Component {
   }
 
   render() {
-    return <DivContainer>{this.renderFinalView()}</DivContainer>
+    const {searchInput} = this.state
+    return (
+      <DivContainer>
+        <NxtWatchBanner />
+        <SearchInputDiv>
+          <SearchInput
+            type="search"
+            fixed
+            value={searchInput}
+            onChange={this.onChangeSearchInput}
+            placeholder="Search"
+            onKeyDown={this.onKey}
+          />
+          <FaSearch
+            size="19"
+            style={{marginLeft: '5px'}}
+            onClick={this.onSearch}
+          />
+        </SearchInputDiv>
+        {this.renderFinalView()}
+      </DivContainer>
+    )
   }
 }
 
