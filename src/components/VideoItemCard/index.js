@@ -11,12 +11,19 @@ import {
 
 const VideoItemCard = props => {
   const {videoDetails} = props
-  const {thumbnailUrl, viewCount, channel, publishedAt, title} = videoDetails
+  const {
+    thumbnailUrl,
+    viewCount,
+    channel,
+    publishedAt,
+    title,
+    id,
+  } = videoDetails
   const {name, profileImageUrl} = channel
 
   return (
     <>
-      <Link to="/videos/id" style={{textDecoration: 'none'}}>
+      <Link to={`videos/${id}`} style={{textDecoration: 'none'}}>
         <VideoItemContainer>
           <VideoImage src={thumbnailUrl} alt={name} />
           <BottomCard>

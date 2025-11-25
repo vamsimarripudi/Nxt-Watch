@@ -2,29 +2,28 @@ import styled from 'styled-components'
 
 export const NavBar = styled.nav`
   padding: 10px;
-  display: flex;
-
   background-color: #f1f5f9;
   padding-left: 30px;
   padding-right: 30px;
-  height: 70px;
+  height: 80px;
 `
 
 export const NxtWatchImage = styled.img`
-  height: 35px;
-  margin: 10px;
+  height: 30px;
+  margin: 5px;
 `
 
 export const ProfileImage = styled.img`
   height: 30px;
   margin: 10px;
-  margin-left: 30px;
+  margin-left: 10px;
+  margin-right: 15px;
 `
 
 export const LogoutDivContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 10px;
 `
 
@@ -44,7 +43,6 @@ export const LogoutMobileContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: #f1f5f9;
-
   height: 70px;
   width: auto;
   @media screen and (min-width: 768px) {

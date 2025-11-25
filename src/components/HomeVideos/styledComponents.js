@@ -25,12 +25,28 @@ export const VideosUnOrderList = styled.ul`
 `
 
 export const SearchInput = styled.input`
-  width: 300px;
-  padding: 5px;
-  margin-left: 25px;
+  width: 100%;
+  padding: 8px 35px 8px 10px; /* add right padding for icon space */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
 `
 
 export const SearchInputDiv = styled.div`
-  display: flex;
-  align-items: center;
+  position: relative;
+  width: 250px;
+  margin-left: 50px;
+`
+
+export const SearchIcon = styled.div`
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  cursor: pointer;
+
+  &:hover {
+    color: #000;
+  }
 `

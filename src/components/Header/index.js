@@ -1,27 +1,23 @@
 import {withRouter, Link} from 'react-router-dom'
-import Cookies from 'js-cookie'
+
 import {HiOutlineLightBulb} from 'react-icons/hi'
-import {FiLogOut} from 'react-icons/fi'
+
 import {MdDarkMode} from 'react-icons/md'
 import {GiHamburgerMenu} from 'react-icons/gi'
+import LogoutPopUp from '../LogoutPopUp'
 
 import {
   NavBar,
   NxtWatchImage,
   ProfileImage,
   LogoutDivContainer,
-  LogoutButton,
   LogoutMobileContainer,
   NavBarDesktopVersion,
   IconDivContainer,
 } from './styledComponents'
 
 const Header = props => {
-  const onClickLogoutButton = () => {
-    const {history} = props
-    Cookies.remove('jwt_token')
-    history.replace('/login')
-  }
+  const {history} = props
 
   return (
     <NavBar>
@@ -35,14 +31,13 @@ const Header = props => {
           </Link>
         </div>
         <LogoutDivContainer>
-          <HiOutlineLightBulb size="32" cursor="pointer" />
+          <HiOutlineLightBulb size="30" cursor="pointer" />
           <ProfileImage
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
             alt="profile"
           />
-          <LogoutButton type="button" onClick={onClickLogoutButton}>
-            Logout
-          </LogoutButton>
+
+          <LogoutPopUp history={history} />
         </LogoutDivContainer>
       </NavBarDesktopVersion>
       <LogoutMobileContainer>
@@ -55,9 +50,9 @@ const Header = props => {
           </Link>
         </div>
         <IconDivContainer>
-          <MdDarkMode />
-          <GiHamburgerMenu />
-          <FiLogOut />
+          <MdDarkMode size="20" style={{marginRight: '10px'}} />
+          <GiHamburgerMenu size="20" style={{marginRight: '10px'}} />
+          <LogoutPopUp />
         </IconDivContainer>
       </LogoutMobileContainer>
     </NavBar>

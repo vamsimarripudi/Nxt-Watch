@@ -10,6 +10,7 @@ import {
   VideosUnOrderList,
   SearchInput,
   SearchInputDiv,
+  SearchIcon,
 } from './styledComponents'
 
 const apiStatusConstants = {
@@ -185,11 +186,17 @@ class HomeVideo extends Component {
             placeholder="Search"
             onKeyDown={this.onKey}
           />
-          <FaSearch
-            size="19"
-            style={{marginLeft: '5px'}}
-            onClick={this.onSearch}
-          />
+          <SearchIcon>
+            <FaSearch
+              size="19"
+              style={{
+                marginLeft: '5px',
+                borderRadius: '1px',
+                borderWidth: '1px solid red',
+              }}
+              onClick={this.onSearch}
+            />
+          </SearchIcon>
         </SearchInputDiv>
         {this.renderFinalView()}
       </DivContainer>

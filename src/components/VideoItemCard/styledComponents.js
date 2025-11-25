@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const VideoItemContainer = styled.li`
   height: auto;
   width: 300px;
-
   border-width: 1px solid black;
   margin: 10px;
   padding: 0px;

@@ -1,0 +1,67 @@
+.video-player-card {
+  min-height: 100vh; /* ✅ use min-height instead of fixed height */
+  display: flex;
+  flex-direction: column;
+  overflow: visible; /* let parent handle scrolling */
+  padding-bottom: 20px;
+}
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 ratio (height auto) */
+}
+
+.likes-save-card {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .likes-save-card {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.likes-card {
+  margin: 10px;
+}
+
+.save-card {
+  margin: 10px;
+  display: flex;
+}
+
+.like-card {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.dislike-card {
+  display: flex;
+  align-items: center;
+}
+.saved-card {
+  margin: 10px;
+}
+.video-wrapper iframe,
+.video-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.bottom-card {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .description {
+    margin-left: 50px;
+  }
+}
