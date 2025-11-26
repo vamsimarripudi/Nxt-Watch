@@ -1,5 +1,5 @@
 import Popup from 'reactjs-popup'
-import {Redirect} from 'react-router-dom'
+
 import Cookies from 'js-cookie'
 import {FiLogOut} from 'react-icons/fi'
 import './index.css'
@@ -23,17 +23,24 @@ const LogoutPopUp = props => {
     Cookies.remove('jwt_token')
     history.replace('/login')
   }
+  const {isDark} = props
+  const theme = isDark ? 'dark' : 'light'
+  const color = isDark ? 'white' : 'black'
   return (
     <>
       <PopUpDivContainer>
         <Popup
           modal
-          trigger={<LogoutButton type="button">Logout</LogoutButton>}
+          trigger={
+            <LogoutButton type="button" color={color}>
+              Logout
+            </LogoutButton>
+          }
           overlayStyle={styles}
         >
           {close => (
             <>
-              <PopupCard>
+              <PopupCard theme={theme}>
                 <p>Are you sure you want to logout?</p>
 
                 <Buttons>
@@ -55,7 +62,11 @@ const LogoutPopUp = props => {
           trigger={
             <button
               type="button"
-              style={{backgroundColor: 'transparent', border: 'none'}}
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                color: `${color}`,
+              }}
             >
               <FiLogOut size="20" />
             </button>

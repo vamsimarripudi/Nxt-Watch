@@ -17,7 +17,8 @@ export const PopUpMobileContainer = styled.div`
 
 export const PopupCard = styled.div`
   width: 480px;
-  background: #ffffff;
+  background-color: ${props =>
+    props.theme === 'dark' ? '#121212' : '#f4f4f4'};
   padding: 30px 35px;
   border-radius: 6px;
   box-shadow: none;
@@ -30,7 +31,7 @@ export const PopupCard = styled.div`
     font-size: 18px;
     font-weight: 600;
     margin: 0;
-    color: #111;
+    color: ${props => (props.theme === 'dark' ? '#f4f4f4' : '#111')};
     line-height: 1.3;
   }
 
@@ -62,6 +63,7 @@ export const LogoutButton = styled.button`
   padding-right: 25px;
   font-weight: bold;
   cursor: pointer;
+  color: ${props => (props.color === 'white' ? '#f4f4f4' : '#121212')};
 `
 
 export const Buttons = styled.div`

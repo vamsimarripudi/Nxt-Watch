@@ -188,7 +188,7 @@ class HomeVideo extends Component {
           />
           <SearchIcon>
             <FaSearch
-              size="19"
+              size="15"
               style={{
                 marginLeft: '5px',
                 borderRadius: '1px',

@@ -7,6 +7,10 @@ import {
   BottomLeftCard,
   VideoTitle,
   BottomViewCard,
+  ProfileImage,
+  NameTag,
+  PublishedTag,
+  ViewCount,
 } from './styledComponents'
 
 const VideoItemCard = props => {
@@ -27,13 +31,13 @@ const VideoItemCard = props => {
         <VideoItemContainer>
           <VideoImage src={thumbnailUrl} alt={name} />
           <BottomCard>
-            <img src={profileImageUrl} alt={name} style={{height: '50px'}} />
+            <ProfileImage src={profileImageUrl} alt={name} />
             <BottomLeftCard>
               <VideoTitle>{title}</VideoTitle>
               <BottomViewCard>
-                <p>{name} *</p>
-                <p>{viewCount} views *</p>
-                <p>{publishedAt}</p>
+                <NameTag>{name} *</NameTag>
+                <ViewCount>{viewCount} views *</ViewCount>
+                <PublishedTag>{publishedAt}</PublishedTag>
               </BottomViewCard>
             </BottomLeftCard>
           </BottomCard>

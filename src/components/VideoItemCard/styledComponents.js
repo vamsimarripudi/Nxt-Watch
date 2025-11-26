@@ -37,6 +37,9 @@ export const BottomLeftCard = styled.div`
 export const VideoTitle = styled.p`
   font-size: 15px;
   margin-bottom: 5px;
+  @media screen and (max-width: 768px) {
+    font-size: 13px;
+  }
 `
 
 export const BottomViewCard = styled.div`
@@ -45,3 +48,13 @@ export const BottomViewCard = styled.div`
   justify-content: space-around;
   font-size: 14px;
 `
+
+export const ProfileImage = styled.img`
+  height: 50px;
+  @media screen and (max-width: 768px) {
+    height: 35px;
+  }
+`
+export const NameTag = styled.p``
+export const PublishedTag = styled.p``
+export const ViewCount = styled.p``

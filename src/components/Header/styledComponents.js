@@ -5,7 +5,10 @@ export const NavBar = styled.nav`
   background-color: #f1f5f9;
   padding-left: 30px;
   padding-right: 30px;
-  height: 80px;
+  height: 20vh;
+  background-color: ${props =>
+    props.theme === 'dark' ? '#212121' : '#f4f4f4'};
+  border: 1px solid white;
 `
 
 export const NxtWatchImage = styled.img`
@@ -48,6 +51,8 @@ export const LogoutMobileContainer = styled.div`
   @media screen and (min-width: 768px) {
     display: none;
   }
+  background-color: ${props =>
+    props.theme === 'dark' ? '#212121' : '#f4f4f4'};
 `
 
 export const NavBarDesktopVersion = styled.div`
@@ -63,4 +68,10 @@ export const IconDivContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+`
+export const IconButton = styled.button`
+  background-color: transparent;
+  border: none;
+  margin-left: 5px;
+  margin-right: 5px;
 `

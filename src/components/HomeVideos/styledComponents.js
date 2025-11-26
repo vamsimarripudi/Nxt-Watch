@@ -36,6 +36,13 @@ export const SearchInputDiv = styled.div`
   position: relative;
   width: 250px;
   margin-left: 50px;
+  margin-top: 10px;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+  }
 `
 
 export const SearchIcon = styled.div`
