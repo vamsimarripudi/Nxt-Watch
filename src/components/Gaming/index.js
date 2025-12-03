@@ -5,11 +5,14 @@ import {FaGamepad} from 'react-icons/fa'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import SideContainer from '../SideContainer'
+import ThemeContext from '../../ContextLanguage'
 import {
   VideosUnOrderList,
   GamingTitle,
   VideoItemContainer,
   GameVideoImage,
+  GamingCardTitle,
+  GamingViewCount,
 } from './styledComponents'
 
 const apiStatusConstructor = {
@@ -101,41 +104,64 @@ class Gaming extends Component {
     </div>
   )
 
-  renderGamingVideos = () => {
-    const {gamingVideos} = this.state
-    return (
-      <>
-        <div
-          style={{
-            height: '100vh',
-            overflow: 'auto',
-            width: '100vw',
-            flexWrap: 'wrap',
-            scrollbarWidth: 'none',
-          }}
-        >
-          <div style={{display: 'flex', alignItems: 'center'}}>
-            <FaGamepad
-              size="50"
-              style={{margin: '10px', color: 'red', marginLeft: '50px'}}
-            />
-            <GamingTitle>Gaming</GamingTitle>
-          </div>
-          <VideosUnOrderList>
-            {gamingVideos.map(each => (
-              <Link to={`/videos/${each.id}`} style={{textDecoration: 'none'}}>
-                <VideoItemContainer key={each.id}>
-                  <GameVideoImage src={each.thumbnailUrl} alt={each.title} />
-                  <p>{each.title}</p>
-                  <p>{each.viewCount} Watching Worldwide</p>
-                </VideoItemContainer>
-              </Link>
-            ))}
-          </VideosUnOrderList>
-        </div>
-      </>
-    )
-  }
+  renderGamingVideos = () => (
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const {gamingVideos} = this.state
+        const theme = isDark ? '#121212' : '#f4f4f4'
+        const color = isDark ? 'white' : 'black'
+
+        return (
+          <>
+            <div
+              style={{
+                height: '100vh',
+                overflow: 'auto',
+                width: '100vw',
+                flexWrap: 'wrap',
+                scrollbarWidth: 'none',
+                backgroundColor: `${theme}`,
+              }}
+            >
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <FaGamepad
+                  size="50"
+                  style={{margin: '10px', color: 'red', marginLeft: '50px'}}
+                />
+                <GamingTitle color={color}>Gaming</GamingTitle>
+              </div>
+              <VideosUnOrderList>
+                {gamingVideos.map(each => (
+                  <Link
+                    to={`/videos/${each.id}`}
+                    style={{textDecoration: 'none'}}
+                  >
+                    <VideoItemContainer
+                      key={each.id}
+                      theme={theme}
+                      color={color}
+                    >
+                      <GameVideoImage
+                        src={each.thumbnailUrl}
+                        alt={each.title}
+                      />
+                      <GamingCardTitle color={color}>
+                        {each.title}
+                      </GamingCardTitle>
+                      <GamingViewCount color={color}>
+                        {each.viewCount} Watching Worldwide
+                      </GamingViewCount>
+                    </VideoItemContainer>
+                  </Link>
+                ))}
+              </VideosUnOrderList>
+            </div>
+          </>
+        )
+      }}
+    </ThemeContext.Consumer>
+  )
 
   renderFinalView = () => {
     const {apiStatus} = this.state

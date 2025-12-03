@@ -1,19 +1,23 @@
 import styled from 'styled-components'
 
 export const NavBar = styled.nav`
-  padding: 10px;
-  background-color: #f1f5f9;
-  padding-left: 30px;
-  padding-right: 30px;
   height: 20vh;
   background-color: ${props =>
-    props.theme === 'dark' ? '#212121' : '#f4f4f4'};
-  border: 1px solid white;
+    props.theme === 'dark' ? '#212121' : '#cbd5e1'};
+  padding: 5px;
+  @media screen and (min-width: 768px) {
+    height: 15vh;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 `
 
 export const NxtWatchImage = styled.img`
   height: 30px;
   margin: 5px;
+  @media screen and (min-width: 768px) {
+    height: 40px;
+  }
 `
 
 export const ProfileImage = styled.img`

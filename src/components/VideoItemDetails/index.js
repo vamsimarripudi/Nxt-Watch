@@ -5,13 +5,17 @@ import Loader from 'react-loader-spinner'
 import {BiLike, BiDislike} from 'react-icons/bi'
 import {RiMenuAddFill} from 'react-icons/ri'
 import Cookies from 'js-cookie'
+import ThemeContext from '../../ContextLanguage'
 import SideContainer from '../SideContainer'
 import Header from '../Header'
 import {
   VideoDivContainer,
   DivContainer,
-  VideoViewPara,
-  PublishedTime,
+  VideoContainer,
+  VideoDetailsContainer,
+  BottomCardContainer,
+  VideoTitle,
+  Button,
 } from './styledComponents'
 
 import './index.css'
@@ -27,9 +31,8 @@ class VideoItemDetails extends Component {
   state = {
     videoDetails: {},
     apiStatus: apiStatusConstructor.initial,
-    savedLater: [],
-    isSaved: false,
     isLiked: false,
+    isDisliked: false,
   }
 
   componentDidMount() {
@@ -80,91 +83,180 @@ class VideoItemDetails extends Component {
     }
   }
 
+  updatedLikeButton = () =>
+    this.setState(prevState => ({
+      isLiked: !prevState.isLiked,
+      isDisliked: false,
+    }))
+
+  updatedDisLikeButton = () =>
+    this.setState(prevState => ({
+      isDisliked: !prevState.isDisliked,
+      isLiked: false,
+    }))
+
   renderViewOfVideo = () => {
-    const {videoDetails} = this.state
-    const {title, description, videoUrl, viewCount, publishedAt} = videoDetails
+    const {videoDetails, isDisliked, isLiked} = this.state
+    const {
+      title,
+      description,
+      videoUrl,
+      viewCount,
+      publishedAt,
+      id,
+    } = videoDetails
     const {name, profileImageUrl, subscriberCount} = videoDetails.channel
 
-    const {isSaved} = this.state
-
     return (
-      <div className="video-player-card">
-        <div className="video-wrapper">
-          <ReactPlayer url={videoUrl} width="100%" height="100%" controls />
-        </div>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDark, updateSave, savedVideosList} = value
+          const theme = isDark ? 'dark' : 'light'
+          const color = isDark ? '#f4f4f4' : '#121212'
+          const likeIsActive = isLiked ? 'active' : 'not-active'
+          const dislikeIsActive = isDisliked ? 'active' : 'not-active'
+          const present = (savedVideosList || []).find(each => each.id === id)
+          const saveIsActive = present !== undefined ? 'active' : 'not-active'
+          const saveText = present !== undefined ? 'Saved' : 'Save'
 
-        <div style={{display: 'flex', flexDirection: 'column'}}>
-          <p style={{margin: '10px'}}>{title}</p>
-          <div style={{display: 'flex'}} className="likes-save-card">
-            <div style={{display: 'flex'}} className="likes-card">
-              <VideoViewPara>{viewCount} views</VideoViewPara>
-              <PublishedTime>{publishedAt} ago</PublishedTime>
-            </div>
-            <div className="save-card">
-              <div className="like-card">
-                <BiLike />
-                <p>Like</p>
-              </div>
-              <div className="dislike-card">
-                <BiDislike />
-                <p>Dislike</p>
-              </div>
-              <div className="saved-card">
-                <RiMenuAddFill />
-                {isSaved ? 'saved' : 'save'}
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr
-          style={{
-            width: '100%',
-            height: '2px',
-            color: 'gray',
-            marginTop: '15px',
-            marginBottom: '15px',
-          }}
-        />
-        <div className="bottom-card">
-          <div style={{display: 'flex'}}>
-            <div>
-              <img src={profileImageUrl} alt={name} style={{height: '50px'}} />
-            </div>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-              <p>{name}</p>
-              <p>{subscriberCount} subscribers</p>
-            </div>
-          </div>
-          <p className="description">{description}</p>
-        </div>
-      </div>
+          return (
+            <VideoDetailsContainer theme={theme}>
+              <VideoContainer>
+                <ReactPlayer
+                  url={videoUrl}
+                  width="100%"
+                  height="100%"
+                  controls
+                />
+              </VideoContainer>
+              <BottomCardContainer>
+                <VideoTitle
+                  color={color}
+                  style={{padding: '10px', marginLeft: '10px'}}
+                >
+                  {title}
+                </VideoTitle>
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div style={{display: 'flex'}}>
+                      <p
+                        style={{
+                          color: `${color}`,
+                          padding: '10px',
+                          marginLeft: '10px',
+                        }}
+                      >
+                        {viewCount} views
+                      </p>
+                      <p
+                        style={{
+                          color: `${color}`,
+                          padding: '10px',
+                          marginLeft: '10px',
+                        }}
+                      >
+                        {publishedAt} ago
+                      </p>
+                    </div>
+
+                    <div style={{display: 'flex'}}>
+                      <Button
+                        theme={likeIsActive}
+                        type="button"
+                        onClick={this.updatedLikeButton}
+                      >
+                        <BiLike /> Like
+                      </Button>
+                      <Button
+                        type="button"
+                        theme={dislikeIsActive}
+                        onClick={this.updatedDisLikeButton}
+                      >
+                        <BiDislike /> Dislike
+                      </Button>
+                      <Button
+                        type="button"
+                        theme={saveIsActive}
+                        onClick={() => updateSave(videoDetails)}
+                      >
+                        <RiMenuAddFill /> {saveText}
+                      </Button>
+                    </div>
+                  </div>
+                  <hr style={{width: '100%'}} />
+                  <div style={{display: 'flex'}}>
+                    <img
+                      src={profileImageUrl}
+                      alt="channel logo"
+                      style={{height: '50px', marginLeft: '10px'}}
+                    />
+                    <div>
+                      <p style={{color: `${color}`, marginLeft: '10px'}}>
+                        {name}
+                      </p>
+                      <p style={{color: `${color}`, marginLeft: '10px'}}>
+                        {subscriberCount} subscribers
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <p style={{color: `${color}`, marginLeft: '10px'}}>
+                      {description}
+                    </p>
+                  </div>
+                </div>
+              </BottomCardContainer>
+            </VideoDetailsContainer>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 
   onRetryButton = () => this.getVideoDetailsById()
 
   renderFailureView = () => (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const theme = isDark ? '#121212' : 'f4f4f4'
+        return (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100vh',
+              backgroundColor: `${theme}`,
+            }}
+          >
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
+              alt="banner"
+            />
+            <h1 style={{color: `${theme}`}}>Oops! Something Went Wrong</h1>
+            <p style={{color: `${theme}`}}>
+              We are having some trouble to complete your request. Please try
+              again.
+            </p>
+            <button
+              type="button"
+              onClick={this.onRetryButton}
+              style={{color: `${theme}`, backgroundColor: `${theme}`}}
+            >
+              Retry
+            </button>
+          </div>
+        )
       }}
-    >
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="banner"
-      />
-      <h1>Oops! Something Went Wrong</h1>
-      <p>
-        We are having some trouble to complete your request. Please try again.
-      </p>
-      <button type="button" onClick={this.onRetryButton}>
-        Retry
-      </button>
-    </div>
+    </ThemeContext.Consumer>
   )
 
   renderLoadingView = () => (
@@ -200,13 +292,25 @@ class VideoItemDetails extends Component {
 
   render() {
     return (
-      <>
-        <Header />
-        <DivContainer>
-          <SideContainer />
-          <VideoDivContainer>{this.renderFinalView()}</VideoDivContainer>
-        </DivContainer>
-      </>
+      <ThemeContext.Consumer>
+        {value => {
+          const {isDark} = value
+          const theme = isDark ? 'dark' : 'light'
+          const color = isDark ? 'white' : 'black'
+
+          return (
+            <>
+              <Header />
+              <DivContainer theme={theme} color={color}>
+                <SideContainer />
+                <VideoDivContainer theme={theme} color={color}>
+                  {this.renderFinalView()}
+                </VideoDivContainer>
+              </DivContainer>
+            </>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

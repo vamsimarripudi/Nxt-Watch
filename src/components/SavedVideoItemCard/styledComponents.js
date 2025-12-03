@@ -1,27 +1,28 @@
 import styled from 'styled-components'
 
 export const VideoItemContainer = styled.li`
-  min-height: 280px;
-  max-height: auto;
-  width: 300px;
+  height: 150px;
+  width: auto;
   border-width: 1px solid black;
   margin: 10px;
+
   padding: 0px;
   text-decoration: none;
   background-color: ${props =>
     props.theme === 'dark' ? '#121212' : '#f4f3f3'};
   @media screen and (max-width: 768px) {
     margin: 5px;
+    height: 100px;
   }
 `
 export const VideoImage = styled.img`
   height: auto;
-  width: 100%;
+  width: 200px;
 `
 
 export const BottomCard = styled.div`
   display: flex;
-  align-items: center;
+
   padding: 5px;
   height: auto;
 `
@@ -29,7 +30,7 @@ export const BottomCard = styled.div`
 export const BottomLeftCard = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 
   color: #fff;
   margin: 0px;
@@ -46,8 +47,8 @@ export const VideoTitle = styled.p`
 
 export const BottomViewCard = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: 'column';
+
   font-size: 14px;
 `
 

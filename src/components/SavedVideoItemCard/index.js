@@ -8,7 +8,6 @@ import {
   BottomLeftCard,
   VideoTitle,
   BottomViewCard,
-  ProfileImage,
   NameTag,
   PublishedTag,
   ViewCount,
@@ -29,19 +28,18 @@ const VideoItemCard = props => (
         title,
         id,
       } = videoDetails
-      const {name, profileImageUrl} = channel
+      const {name} = channel
 
       return (
         <>
           <Link to={`videos/${id}`} style={{textDecoration: 'none'}}>
-            <VideoItemContainer theme={theme}>
+            <VideoItemContainer theme={theme} style={{display: 'flex'}}>
               <VideoImage src={thumbnailUrl} alt={name} />
               <BottomCard>
-                <ProfileImage src={profileImageUrl} alt={name} />
                 <BottomLeftCard>
                   <VideoTitle style={{color: `${color}`}}>{title}</VideoTitle>
+                  <NameTag style={{color: `${color}`}}>{name} </NameTag>
                   <BottomViewCard>
-                    <NameTag style={{color: `${color}`}}>{name} *</NameTag>
                     <ViewCount style={{color: `${color}`}}>
                       {viewCount} views *
                     </ViewCount>

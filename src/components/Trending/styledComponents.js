@@ -9,8 +9,10 @@ export const VideosUnOrderList = styled.ul`
   white-space: wrap; /* Prevent line breaks */
   scrollbar-width: none;
   height: 100%;
+  background-color: ${props => props.theme};
 `
 
 export const TrendingTitle = styled.h1`
   margin-left: 50px;
+  color: ${props => props.color};
 `

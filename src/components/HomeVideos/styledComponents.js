@@ -22,6 +22,8 @@ export const VideosUnOrderList = styled.ul`
   white-space: wrap; /* Prevent line breaks */
   scrollbar-width: none;
   height: 100%;
+  background-color: ${props =>
+    props.theme === 'dark' ? '#121212' : '#f4f4f4'};
 `
 
 export const SearchInput = styled.input`

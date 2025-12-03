@@ -56,7 +56,8 @@ export const CloseButton = styled.button`
 `
 
 export const LogoutButton = styled.button`
-  background-color: transparent;
+  background-color: ${props =>
+    props.theme === 'dark' ? '#121212' : '#f4f4f4'};
   border: 2px solid skyblue;
   padding: 10px;
   padding-left: 25px;

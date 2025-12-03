@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import SideContainer from '../SideContainer'
 import VideoItemCard from '../VideoItemCard'
+import ThemeContext from '../../ContextLanguage'
 
 import {VideosUnOrderList, TrendingTitle} from './styledComponents'
 
@@ -62,29 +63,38 @@ class Trending extends Component {
     }
   }
 
-  renderTrendingVideoView = () => {
-    const {trendingVideoDetails} = this.state
-    return (
-      <div
-        style={{
-          height: '100vh',
-          overflow: 'auto',
-          width: '100vw',
-          flexWrap: 'wrap',
-          scrollbarWidth: 'none',
-        }}
-      >
-        <TrendingTitle>
-          <FaFire style={{color: 'red'}} /> Trending
-        </TrendingTitle>
-        <VideosUnOrderList>
-          {trendingVideoDetails.map(each => (
-            <VideoItemCard key={each.id} videoDetails={each} />
-          ))}
-        </VideosUnOrderList>
-      </div>
-    )
-  }
+  renderTrendingVideoView = () => (
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const {trendingVideoDetails} = this.state
+        const theme = isDark ? '#121212' : '#f4f4f4'
+        const color = isDark ? 'white' : 'black'
+
+        return (
+          <div
+            style={{
+              height: '100vh',
+              overflow: 'auto',
+              width: '100vw',
+              flexWrap: 'wrap',
+              scrollbarWidth: 'none',
+              backgroundColor: `${theme}`,
+            }}
+          >
+            <TrendingTitle color={color}>
+              <FaFire style={{color: 'red'}} /> Trending
+            </TrendingTitle>
+            <VideosUnOrderList theme={theme}>
+              {trendingVideoDetails.map(each => (
+                <VideoItemCard key={each.id} videoDetails={each} />
+              ))}
+            </VideosUnOrderList>
+          </div>
+        )
+      }}
+    </ThemeContext.Consumer>
+  )
 
   renderLoadingView = () => (
     <div

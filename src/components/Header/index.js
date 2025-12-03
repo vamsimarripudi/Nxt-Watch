@@ -1,8 +1,6 @@
 import {Component} from 'react'
 import {withRouter, Link} from 'react-router-dom'
 
-import {HiOutlineLightBulb} from 'react-icons/hi'
-
 import {FiSun} from 'react-icons/fi'
 import {FaMoon} from 'react-icons/fa'
 

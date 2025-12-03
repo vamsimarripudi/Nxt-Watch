@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner'
 import Cookies from 'js-cookie'
 import VideoItemCard from '../VideoItemCard'
 import NxtWatchBanner from '../NxtWatchBanner'
+import ThemeContext from '../../ContextLanguage'
 
 import {
   DivContainer,
@@ -90,35 +91,14 @@ class HomeVideo extends Component {
   }
 
   renderLoadingView = () => (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-      }}
-      data-testid="loader"
-    >
-      <Loader type="ThreeDots" color="blue" height="50" width="50" />
-    </div>
-  )
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDark} = value
 
-  onRetryButton = () => this.getHomeVideosApi()
+        const theme = isDark ? 'dark' : 'light'
+        const color = isDark ? 'white' : 'blue'
 
-  renderVideosView = () => {
-    const {videosList} = this.state
-    const hasVideos = videosList.length !== 0
-
-    return (
-      <div>
-        {hasVideos ? (
-          <VideosUnOrderList>
-            {videosList.map(eachItem => (
-              <VideoItemCard key={eachItem.id} videoDetails={eachItem} />
-            ))}
-          </VideosUnOrderList>
-        ) : (
+        return (
           <div
             style={{
               display: 'flex',
@@ -126,20 +106,73 @@ class HomeVideo extends Component {
               alignItems: 'center',
               justifyContent: 'center',
               height: '100vh',
+              backgroundColor: `${theme}`,
             }}
+            data-testid="loader"
           >
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
-              alt="no videos"
-              style={{height: '300px', width: '300px'}}
+            <Loader
+              type="ThreeDots"
+              color={`${color}`}
+              height="50"
+              width="50"
             />
-            <h1>No Search Results Found</h1>
-            <p>Try different keywords or remove the search filter.</p>
           </div>
-        )}
-      </div>
-    )
-  }
+        )
+      }}
+    </ThemeContext.Consumer>
+  )
+
+  onRetryButton = () => this.getHomeVideosApi()
+
+  renderVideosView = () => (
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const {videosList} = this.state
+        const hasVideos = videosList.length !== 0
+        const theme = isDark ? 'dark' : 'white'
+        const themeColor = isDark ? '#121212' : '#f4f4f4'
+        const color = isDark ? 'white' : 'black'
+
+        return (
+          <div>
+            {hasVideos ? (
+              <VideosUnOrderList theme={theme}>
+                {videosList.map(eachItem => (
+                  <VideoItemCard key={eachItem.id} videoDetails={eachItem} />
+                ))}
+              </VideosUnOrderList>
+            ) : (
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  height: '100vh',
+                  backgroundColor: `${themeColor}`,
+                }}
+              >
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+                  alt="no videos"
+                  style={{
+                    height: '300px',
+                    width: '300px',
+                    backgroundColor: `${themeColor}`,
+                  }}
+                />
+                <h1 style={{color: `${color}`}}>No Search Results Found</h1>
+                <p style={{color: `${color}`}}>
+                  Try different keywords or remove the search filter.
+                </p>
+              </div>
+            )}
+          </div>
+        )
+      }}
+    </ThemeContext.Consumer>
+  )
 
   renderFailureView = () => (
     <div>
@@ -185,6 +218,7 @@ class HomeVideo extends Component {
             onChange={this.onChangeSearchInput}
             placeholder="Search"
             onKeyDown={this.onKey}
+            data-testid="searchButton"
           />
           <SearchIcon>
             <FaSearch

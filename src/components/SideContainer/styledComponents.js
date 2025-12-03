@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const SideDivContainer = styled.div`
   padding: 10px;
-  background-color: #f3f3f3;
+  background-color: ${props =>
+    props.theme === 'dark' ? '#121212' : '#cbd5e1'};
   height: 100vh;
   width: 20%;
   padding: 20px;
@@ -10,6 +11,7 @@ export const SideDivContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 0px;
+
   @media screen and (max-width: 768px) {
     display: none;
   }

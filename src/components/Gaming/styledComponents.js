@@ -18,7 +18,8 @@ export const VideoItemContainer = styled.li`
   margin: 10px;
   padding: 0px;
   text-decoration: none;
-  background-color: #f4f3f3;
+  background-color: ${props => props.theme};
+
   @media screen and (max-width: 768px) {
     margin: 5px;
   }
@@ -26,8 +27,16 @@ export const VideoItemContainer = styled.li`
 
 export const GamingTitle = styled.h1`
   margin-left: 10px;
+  color: ${props => props.color};
 `
 export const GameVideoImage = styled.img`
   height: 250px;
   width: 100%;
+`
+
+export const GamingCardTitle = styled.p`
+  color: ${props => props.color};
+`
+export const GamingViewCount = styled.p`
+  color: ${props => props.color};
 `

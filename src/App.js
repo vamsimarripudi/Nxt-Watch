@@ -15,7 +15,7 @@ import './App.css'
 
 // Replace your code here
 class App extends Component {
-  state = {isDark: false}
+  state = {isDark: false, save: false, savedVideosList: []}
 
   changeTheme = () => {
     this.setState(prevState => ({
@@ -23,13 +23,48 @@ class App extends Component {
     }))
   }
 
+  addVideosToSavedVideos = videoDetails => {
+    this.setState(prev => ({
+      savedVideosList: [...(prev.savedVideosList || []), videoDetails],
+    }))
+  }
+
+  deleteVideosFromSavedVideos = videoDetails => {
+    const {savedVideosList} = this.state
+    const updatedList = savedVideosList.filter(
+      each => each.id !== videoDetails.id,
+    )
+    this.setState({savedVideosList: updatedList})
+  }
+
+  updateSaveVideosList = videoDetails => {
+    const {save} = this.state
+    if (save) {
+      this.deleteVideosFromSavedVideos(videoDetails)
+    } else {
+      this.addVideosToSavedVideos(videoDetails)
+    }
+  }
+
+  updateSave = videoDetails => {
+    this.setState(
+      prev => ({save: !prev.save}),
+      this.updateSaveVideosList(videoDetails),
+    )
+  }
+
   render() {
-    const {isDark} = this.state
+    const {isDark, save, savedVideosList} = this.state
     return (
       <ThemeContext.Provider
         value={{
           isDark,
           changeTheme: this.changeTheme,
+          save,
+          savedVideosList,
+          addVideosToSavedVideos: this.addVideosToSavedVideos,
+          deleteVideosFromSavedVideos: this.deleteVideosFromSavedVideos,
+          updateSave: this.updateSave,
         }}
       >
         <Switch>
