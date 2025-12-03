@@ -68,7 +68,7 @@ class Trending extends Component {
       {value => {
         const {isDark} = value
         const {trendingVideoDetails} = this.state
-        const theme = isDark ? '#121212' : '#f4f4f4'
+        const theme = isDark ? '#0f0f0f' : '#f9f9f9'
         const color = isDark ? 'white' : 'black'
 
         return (
@@ -115,27 +115,41 @@ class Trending extends Component {
   onRetryButton = () => this.getTrendingVideos()
 
   renderFailureView = () => (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const theme = isDark ? '#0f0f0f' : '#f9f9f9'
+        const failureView = isDark
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+        return (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100vh',
+              backgroundColor: `${theme}`,
+            }}
+          >
+            <img src={failureView} alt="failure view" />
+            <h1 style={{color: `${theme}`}}>Oops! Something Went Wrong</h1>
+            <p style={{color: `${theme}`}}>
+              We are having some trouble to complete your request. Please try
+              again.
+            </p>
+            <button
+              type="button"
+              onClick={this.onRetryButton}
+              style={{color: `${theme}`, backgroundColor: `${theme}`}}
+            >
+              Retry
+            </button>
+          </div>
+        )
       }}
-    >
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="banner"
-      />
-      <h1>Oops! Something Went Wrong</h1>
-      <p>
-        We are having some trouble to complete your request. Please try again.
-      </p>
-      <button type="button" onClick={this.onRetryButton}>
-        Retry
-      </button>
-    </div>
+    </ThemeContext.Consumer>
   )
 
   renderFinalView = () => {
@@ -158,7 +172,7 @@ class Trending extends Component {
     return (
       <>
         <Header />
-        <div style={{display: 'flex'}}>
+        <div style={{display: 'flex'}} data-testid="trending">
           <SideContainer />
 
           {this.renderFinalView()}

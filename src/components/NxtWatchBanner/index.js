@@ -19,6 +19,7 @@ class NxtWatchBanner extends Component {
             alignItems: 'flex-end',
             justifyContent: 'end',
           }}
+          data-testid="banner"
         >
           <button
             type="button"
@@ -31,6 +32,7 @@ class NxtWatchBanner extends Component {
               cursor: 'pointer',
             }}
             onClick={this.setVisibility}
+            data-testid="close"
           >
             x
           </button>
@@ -39,7 +41,7 @@ class NxtWatchBanner extends Component {
           <img
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
             alt="website-logo"
-            className="banner-logo"
+            className="nxt watch logo"
           />
           <h1 className="title">
             Buy Nxt Watch Premium prepaid plans with UPI

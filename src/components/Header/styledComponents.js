@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const NavBar = styled.nav`
-  height: 20vh;
+  height: 11vh;
   background-color: ${props =>
     props.theme === 'dark' ? '#212121' : '#cbd5e1'};
   padding: 5px;

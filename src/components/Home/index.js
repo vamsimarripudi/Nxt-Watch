@@ -18,7 +18,7 @@ const Home = () => (
       return (
         <>
           <Header />
-          <DivContainer theme={theme}>
+          <DivContainer theme={theme} data-testid="home">
             <SideContainer />
             <HomeVideo />
           </DivContainer>

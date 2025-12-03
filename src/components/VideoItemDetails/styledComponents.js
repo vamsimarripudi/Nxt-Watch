@@ -7,7 +7,7 @@ export const DivContainer = styled.div`
 
   width: auto;
   background-color: ${props =>
-    props.theme === 'dark' ? '#121212' : '#f4f4f4'};
+    props.theme === 'dark' ? '#0f0f0f' : '#f9f9f9'};
   color: ${props => props.color};
   overflow: hidden; /* keep side + main layout clean */
 `

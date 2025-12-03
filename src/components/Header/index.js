@@ -39,7 +39,7 @@ class Header extends Component {
               <NavBarDesktopVersion>
                 <div>
                   <Link to="/">
-                    <NxtWatchImage src={websiteLogo} alt="website-logo" />
+                    <NxtWatchImage src={websiteLogo} alt="website logo" />
                   </Link>
                 </div>
                 <LogoutDivContainer>

@@ -175,18 +175,41 @@ class HomeVideo extends Component {
   )
 
   renderFailureView = () => (
-    <div>
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-        alt="failure"
-        className=""
-      />
-      <h1>Oops! Something Went Wrong</h1>
-      <p>We are having some trouble completing your request.Please try again</p>
-      <button type="button" onClick={this.onRetryButton}>
-        Retry
-      </button>
-    </div>
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDark} = value
+        const theme = isDark ? '#0f0f0f' : '#f9f9f9'
+        const failureView = isDark
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+        return (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100vh',
+              backgroundColor: `${theme}`,
+            }}
+          >
+            <img src={failureView} alt="failure view" />
+            <h1 style={{color: `${theme}`}}>Oops! Something Went Wrong</h1>
+            <p style={{color: `${theme}`}}>
+              We are having some trouble to complete your request. Please try
+              again.
+            </p>
+            <button
+              type="button"
+              onClick={this.onRetryButton}
+              style={{color: `${theme}`, backgroundColor: `${theme}`}}
+            >
+              Retry
+            </button>
+          </div>
+        )
+      }}
+    </ThemeContext.Consumer>
   )
 
   renderFinalView = () => {

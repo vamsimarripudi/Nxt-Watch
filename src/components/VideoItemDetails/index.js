@@ -225,7 +225,10 @@ class VideoItemDetails extends Component {
     <ThemeContext.Consumer>
       {value => {
         const {isDark} = value
-        const theme = isDark ? '#121212' : 'f4f4f4'
+        const theme = isDark ? '#0f0f0f' : '#f9f9f9'
+        const failureView = isDark
+          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
         return (
           <div
             style={{
@@ -237,10 +240,7 @@ class VideoItemDetails extends Component {
               backgroundColor: `${theme}`,
             }}
           >
-            <img
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png"
-              alt="banner"
-            />
+            <img src={failureView} alt="failure view" />
             <h1 style={{color: `${theme}`}}>Oops! Something Went Wrong</h1>
             <p style={{color: `${theme}`}}>
               We are having some trouble to complete your request. Please try
@@ -301,7 +301,11 @@ class VideoItemDetails extends Component {
           return (
             <>
               <Header />
-              <DivContainer theme={theme} color={color}>
+              <DivContainer
+                theme={theme}
+                color={color}
+                data-testid="videoItemDetails"
+              >
                 <SideContainer />
                 <VideoDivContainer theme={theme} color={color}>
                   {this.renderFinalView()}
