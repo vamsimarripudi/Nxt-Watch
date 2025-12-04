@@ -1,7 +1,7 @@
 import {Component} from 'react'
 import ThemeContext from '../../ContextLanguage'
 import Header from '../Header'
-import SideContainer from '../SideContainer'
+import Sidebar from '../Sidebar'
 import {NotFoundImage} from './styledComponents'
 
 class NotFound extends Component {
@@ -19,7 +19,7 @@ class NotFound extends Component {
             <>
               <Header />
               <div style={{display: 'flex'}}>
-                <SideContainer />
+                <Sidebar />
                 <div
                   style={{
                     backgroundColor: `${theme}`,
@@ -32,7 +32,7 @@ class NotFound extends Component {
                     padding: '20px',
                   }}
                 >
-                  <NotFoundImage src={notFoundImage} alt="logo" />
+                  <NotFoundImage src={notFoundImage} alt="not found" />
                   <h1 style={{color: `${color}`}}>Page Not Found</h1>
                   <p style={{color: `${color}`}}>
                     We are sorry, the page you requested could not be found.

@@ -45,7 +45,7 @@ const LogoutPopUp = props => (
               {close => (
                 <>
                   <PopupCard theme={theme}>
-                    <p>Are you sure you want to logout?</p>
+                    <p>Are you sure, you want to logout</p>
 
                     <Buttons>
                       <CancelButton type="button" onClick={close}>

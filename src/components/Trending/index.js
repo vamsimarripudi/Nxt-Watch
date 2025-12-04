@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 import {AiFillFire} from 'react-icons/ai'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
-import SideContainer from '../SideContainer'
+import Sidebar from '../Sidebar'
 import VideoItemCard from '../VideoItemCard'
 import ThemeContext from '../../ContextLanguage'
 
@@ -17,14 +17,14 @@ const apiStatusConstructor = {
 }
 
 class Trending extends Component {
-  state = {trendingVideoDetails: [], apistatus: apiStatusConstructor.initial}
+  state = {trendingVideoDetails: [], apiStatus: apiStatusConstructor.initial}
 
   componentDidMount() {
     this.getTrendingVideos()
   }
 
   getTrendingVideos = async () => {
-    this.setState({apistatus: apiStatusConstructor.inProgress})
+    this.setState({apiStatus: apiStatusConstructor.inProgress})
     const jwtToken = Cookies.get('jwt_token')
 
     const apiUrl = 'https://apis.ccbp.in/videos/trending'
@@ -55,11 +55,11 @@ class Trending extends Component {
       }))
 
       this.setState({
-        apistatus: apiStatusConstructor.success,
+        apiStatus: apiStatusConstructor.success,
         trendingVideoDetails: updatedTrendingVideo,
       })
     } else {
-      this.setState({apistatus: apiStatusConstructor.failure})
+      this.setState({apiStatus: apiStatusConstructor.failure})
     }
   }
 
@@ -153,9 +153,9 @@ class Trending extends Component {
   )
 
   renderFinalView = () => {
-    const {apistatus} = this.state
+    const {apiStatus} = this.state
 
-    switch (apistatus) {
+    switch (apiStatus) {
       case apiStatusConstructor.inProgress:
         return this.renderLoadingView()
       case apiStatusConstructor.failure:
@@ -173,7 +173,7 @@ class Trending extends Component {
       <>
         <Header />
         <div style={{display: 'flex'}} data-testid="trending">
-          <SideContainer />
+          <Sidebar />
 
           {this.renderFinalView()}
         </div>

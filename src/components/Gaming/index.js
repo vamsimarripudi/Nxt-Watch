@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 import {FaGamepad} from 'react-icons/fa'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
-import SideContainer from '../SideContainer'
+import Sidebar from '../Sidebar'
 import ThemeContext from '../../ContextLanguage'
 import {
   VideosUnOrderList,
@@ -158,7 +158,7 @@ class Gaming extends Component {
                     >
                       <GameVideoImage
                         src={each.thumbnailUrl}
-                        alt={each.title}
+                        alt="video thumbnail"
                       />
                       <GamingCardTitle color={color}>
                         {each.title}
@@ -197,7 +197,7 @@ class Gaming extends Component {
       <>
         <Header />
         <div style={{display: 'flex'}} data-testid="gaming">
-          <SideContainer />
+          <Sidebar />
           {this.renderFinalView()}
         </div>
       </>

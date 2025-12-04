@@ -19,7 +19,6 @@ class NxtWatchBanner extends Component {
             alignItems: 'flex-end',
             justifyContent: 'end',
           }}
-          data-testid="banner"
         >
           <button
             type="button"
@@ -37,15 +36,13 @@ class NxtWatchBanner extends Component {
             x
           </button>
         </div>
-        <div>
+        <div data-testid="banner">
           <img
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
             alt="nxt watch logo"
             className="banner-logo"
           />
-          <h1 className="title">
-            Buy Nxt Watch Premium prepaid plans with UPI
-          </h1>
+          <p className="title">Buy Nxt Watch Premium</p>
           <button type="button" className="button">
             GET IT NOW
           </button>

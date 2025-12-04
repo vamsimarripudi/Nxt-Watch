@@ -14,7 +14,7 @@ import {
   SectionDiv,
 } from './styledComponents'
 
-const SideContainer = () => (
+const Sidebar = () => (
   <ThemeContext.Consumer>
     {value => {
       const {isDark} = value
@@ -52,7 +52,7 @@ const SideContainer = () => (
             </Link>
           </TopCardContainer>
           <BottomCardContainer style={{color: `${color}`}} theme={theme}>
-            <ContactTitle>Contact Us</ContactTitle>
+            <ContactTitle>CONTACT US</ContactTitle>
             <IconDivContainer>
               <img
                 src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
@@ -71,7 +71,7 @@ const SideContainer = () => (
               />
             </IconDivContainer>
             <BottomPara style={{color: `${color}`}}>
-              Easy Now to see your channels and recommendations
+              Enjoy! Now to see your channels and recommendations!
             </BottomPara>
           </BottomCardContainer>
         </SideDivContainer>
@@ -80,4 +80,4 @@ const SideContainer = () => (
   </ThemeContext.Consumer>
 )
 
-export default SideContainer
+export default Sidebar

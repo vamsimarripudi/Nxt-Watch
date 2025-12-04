@@ -1,7 +1,7 @@
 import {RiMenuAddLine} from 'react-icons/ri'
 
 import Header from '../Header'
-import SideContainer from '../SideContainer'
+import Sidebar from '../Sidebar'
 import SavedVideoItemCard from '../SavedVideoItemCard'
 import {
   MainBody,
@@ -62,7 +62,7 @@ const SavedVideos = () => {
           <SavedVideosMainContainer data-testid="savedVideos" theme={theme}>
             <Header />
             <MainBody>
-              <SideContainer />
+              <Sidebar />
               <SavedVideosContainer>
                 <SavedMenuContainer theme={theme}>
                   <IconContainer theme={theme}>

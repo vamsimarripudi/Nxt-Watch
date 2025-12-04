@@ -5,7 +5,7 @@ import {BiLike, BiDislike} from 'react-icons/bi'
 import {RiMenuAddFill} from 'react-icons/ri'
 import Cookies from 'js-cookie'
 import ThemeContext from '../../ContextLanguage'
-import SideContainer from '../SideContainer'
+import Sidebar from '../Sidebar'
 import Header from '../Header'
 import {
   VideoDivContainer,
@@ -309,7 +309,7 @@ class VideoItemDetails extends Component {
             <>
               <Header />
               <DivContainer theme={theme} color={color}>
-                <SideContainer />
+                <Sidebar />
                 <VideoDivContainer
                   theme={theme}
                   color={color}

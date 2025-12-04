@@ -37,7 +37,7 @@ const VideoItemCard = props => (
             <VideoItemContainer theme={theme}>
               <VideoImage src={thumbnailUrl} alt={name} />
               <BottomCard>
-                <ProfileImage src={profileImageUrl} alt={name} />
+                <ProfileImage src={profileImageUrl} alt="channel logo" />
                 <BottomLeftCard>
                   <VideoTitle style={{color: `${color}`}}>{title}</VideoTitle>
                   <BottomViewCard>

@@ -54,7 +54,7 @@ export const LoginButton = styled.button`
   padding-bottom: 10px;
   padding-right: 70px;
   font-size: 15px;
-  color: white;
+  color: #ffffff;
   background-color: #6366f1;
   border: 0px;
   border-radius: 10px;
