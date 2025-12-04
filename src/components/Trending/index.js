@@ -1,6 +1,6 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import {FaFire} from 'react-icons/fa6'
+import {AiFillFire} from 'react-icons/ai'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import SideContainer from '../SideContainer'
@@ -83,7 +83,7 @@ class Trending extends Component {
             }}
           >
             <TrendingTitle color={color}>
-              <FaFire style={{color: 'red'}} /> Trending
+              <AiFillFire style={{color: 'red'}} /> Trending
             </TrendingTitle>
             <VideosUnOrderList theme={theme}>
               {trendingVideoDetails.map(each => (

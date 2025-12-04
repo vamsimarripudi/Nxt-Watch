@@ -40,8 +40,8 @@ class NxtWatchBanner extends Component {
         <div>
           <img
             src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-            alt="website-logo"
-            className="nxt watch logo"
+            alt="nxt watch logo"
+            className="banner-logo"
           />
           <h1 className="title">
             Buy Nxt Watch Premium prepaid plans with UPI

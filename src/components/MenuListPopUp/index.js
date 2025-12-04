@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup'
 import {FaHome, FaGamepad} from 'react-icons/fa'
 import {BiTrendingUp} from 'react-icons/bi'
 import {GiSaveArrow} from 'react-icons/gi'
-import {RxHamburgerMenu} from 'react-icons/rx'
+import {RiMenuAddLine} from 'react-icons/ri'
 import './index.css'
 import {PopUpDivContainer, PopupCard, SectionDiv} from './styledComponents'
 
@@ -24,7 +24,7 @@ const MenuListPopup = props => {
               fontSize: '22px',
             }}
           >
-            <RxHamburgerMenu style={{color: `${color}`}} />
+            <RiMenuAddLine style={{color: `${color}`}} />
           </button>
         }
       >
