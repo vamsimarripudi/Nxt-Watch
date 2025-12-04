@@ -13,9 +13,8 @@ import NotFound from './components/NotFound'
 import ThemeContext from './ContextLanguage'
 import './App.css'
 
-// Replace your code here
 class App extends Component {
-  state = {isDark: false, save: false, savedVideosList: []}
+  state = {isDark: false, savedVideosList: []}
 
   changeTheme = () => {
     this.setState(prevState => ({
@@ -23,47 +22,35 @@ class App extends Component {
     }))
   }
 
-  addVideosToSavedVideos = videoDetails => {
-    this.setState(prev => ({
-      savedVideosList: [...(prev.savedVideosList || []), videoDetails],
-    }))
-  }
-
-  deleteVideosFromSavedVideos = videoDetails => {
+  updateSave = videoDetails => {
     const {savedVideosList} = this.state
-    const updatedList = savedVideosList.filter(
-      each => each.id !== videoDetails.id,
+    const isAlreadySaved = savedVideosList.find(
+      each => each.id === videoDetails.id,
     )
-    this.setState({savedVideosList: updatedList})
-  }
 
-  updateSaveVideosList = videoDetails => {
-    const {save} = this.state
-    if (save) {
-      this.deleteVideosFromSavedVideos(videoDetails)
+    if (isAlreadySaved) {
+      // If already saved, remove it
+      this.setState(prevState => ({
+        savedVideosList: prevState.savedVideosList.filter(
+          each => each.id !== videoDetails.id,
+        ),
+      }))
     } else {
-      this.addVideosToSavedVideos(videoDetails)
+      // If not saved, add it
+      this.setState(prevState => ({
+        savedVideosList: [...prevState.savedVideosList, videoDetails],
+      }))
     }
   }
 
-  updateSave = videoDetails => {
-    this.setState(
-      prev => ({save: !prev.save}),
-      this.updateSaveVideosList(videoDetails),
-    )
-  }
-
   render() {
-    const {isDark, save, savedVideosList} = this.state
+    const {isDark, savedVideosList} = this.state
     return (
       <ThemeContext.Provider
         value={{
           isDark,
           changeTheme: this.changeTheme,
-          save,
           savedVideosList,
-          addVideosToSavedVideos: this.addVideosToSavedVideos,
-          deleteVideosFromSavedVideos: this.deleteVideosFromSavedVideos,
           updateSave: this.updateSave,
         }}
       >

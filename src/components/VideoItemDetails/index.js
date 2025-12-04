@@ -1,5 +1,4 @@
 import {Component} from 'react'
-
 import ReactPlayer from 'react-player'
 import Loader from 'react-loader-spinner'
 import {BiLike, BiDislike} from 'react-icons/bi'
@@ -69,9 +68,9 @@ class VideoItemDetails extends Component {
         title: video.title,
         description: video.description,
         publishedAt: video.published_at,
-
         videoUrl: video.video_url,
         viewCount: video.view_count,
+        thumbnailUrl: video.thumbnail_url,
       }
 
       this.setState({
@@ -115,9 +114,11 @@ class VideoItemDetails extends Component {
           const color = isDark ? '#f4f4f4' : '#121212'
           const likeIsActive = isLiked ? 'active' : 'not-active'
           const dislikeIsActive = isDisliked ? 'active' : 'not-active'
-          const present = (savedVideosList || []).find(each => each.id === id)
-          const saveIsActive = present !== undefined ? 'active' : 'not-active'
-          const saveText = present !== undefined ? 'Saved' : 'Save'
+
+          // Check if video is in the list to determine 'active' state
+          const present = savedVideosList.find(each => each.id === id)
+          const saveIsActive = present ? 'active' : 'not-active'
+          const saveText = present ? 'Saved' : 'Save'
 
           return (
             <VideoDetailsContainer theme={theme}>
@@ -183,6 +184,7 @@ class VideoItemDetails extends Component {
                       <Button
                         type="button"
                         theme={saveIsActive}
+                        // Pass videoDetails to the context function
                         onClick={() => updateSave(videoDetails)}
                       >
                         <RiMenuAddFill /> {saveText}
@@ -225,10 +227,8 @@ class VideoItemDetails extends Component {
     <ThemeContext.Consumer>
       {value => {
         const {isDark} = value
-        const theme = isDark ? '#0f0f0f' : '#f9f9f9'
-        const failureView = isDark
-          ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
-          : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+        const theme = isDark ? '#121212' : 'f4f4f4'
+        const color = isDark ? '#f4f4f4' : '#121212'
         return (
           <div
             style={{
@@ -240,16 +240,24 @@ class VideoItemDetails extends Component {
               backgroundColor: `${theme}`,
             }}
           >
-            <img src={failureView} alt="failure view" />
-            <h1 style={{color: `${theme}`}}>Oops! Something Went Wrong</h1>
-            <p style={{color: `${theme}`}}>
+            <img
+              src={
+                isDark
+                  ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-dark-theme-img.png'
+                  : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-failure-view-light-theme-img.png'
+              }
+              alt="failure view"
+              className="failure-img"
+            />
+            <h1 style={{color: `${color}`}}>Oops! Something Went Wrong</h1>
+            <p style={{color: `${color}`}}>
               We are having some trouble to complete your request. Please try
               again.
             </p>
             <button
               type="button"
               onClick={this.onRetryButton}
-              style={{color: `${theme}`, backgroundColor: `${theme}`}}
+              className="retry-button"
             >
               Retry
             </button>
@@ -284,7 +292,6 @@ class VideoItemDetails extends Component {
         return this.renderViewOfVideo()
       case apiStatusConstructor.failure:
         return this.renderFailureView()
-
       default:
         return null
     }
@@ -301,13 +308,13 @@ class VideoItemDetails extends Component {
           return (
             <>
               <Header />
-              <DivContainer
-                theme={theme}
-                color={color}
-                data-testid="videoItemDetails"
-              >
+              <DivContainer theme={theme} color={color}>
                 <SideContainer />
-                <VideoDivContainer theme={theme} color={color}>
+                <VideoDivContainer
+                  theme={theme}
+                  color={color}
+                  data-testid="videoItemDetails"
+                >
                   {this.renderFinalView()}
                 </VideoDivContainer>
               </DivContainer>
